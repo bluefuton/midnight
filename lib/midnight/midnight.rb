@@ -36,9 +36,9 @@ module Midnight
       # remove all tokens without a type
       @tokens.reject! {|token| token.type.nil? }
 
-      # dwrite @tokens.inspect
+      cron_expression = self.convert_tokens_to_cron_expression(@tokens)
 
-      return guess
+      return cron_expression
     end
 
     # Normalize natural string removing prefix language
@@ -63,6 +63,26 @@ module Midnight
     # Returns an array of types for all tokens
     def token_types
       @tokens.map(&:type)
+    end
+
+    def convert_tokens_to_cron_expression(tokens)
+      expr = CronExpression.new
+      tokens.each do |token|
+        # Daily
+        if (token.word == 'day' && token.interval == 1)
+          expr.minute = '0'
+
+          # Do we need to run it at a specific time?
+          hour_token = tokens.detect { |t| t.type == :number }
+          if hour_token.is_a?(Token)
+            expr.hour = hour_token.interval
+          else
+            expr.hour = 0
+          end 
+        end
+      end
+      #puts tokens.inspect
+      expr
     end
   end
 
