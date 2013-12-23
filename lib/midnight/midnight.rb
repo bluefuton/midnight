@@ -80,6 +80,13 @@ module Midnight
             expr.hour = 0
           end 
         end
+      
+        # Weekly
+        if (token.type == :week && token.interval == 7)
+          expr.day_of_week = 0
+          expr.hour = 0
+          expr.minute = 0
+        end
       end
       #puts tokens.inspect
       expr
