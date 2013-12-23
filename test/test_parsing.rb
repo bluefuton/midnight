@@ -17,7 +17,11 @@ class TestParsing < Test::Unit::TestCase
       'every week' => '0 0 * * 0',
       'every 5 minutes' => '*/5 * * * *',
       'every 30 minutes' => '*/30 * * * *',
-      'every month' => '0 0 1 * *'      
+      'every month' => '0 0 1 * *',
+      'monthly' => '0 0 1 * *',
+      'every Monday' => '0 0 * * 1',
+      'every Wednesday' => '0 0 * * 3',
+      'every Friday' => '0 0 * * 5'            
     }
 
     expected_results.each do |search,cron_string|
@@ -26,11 +30,9 @@ class TestParsing < Test::Unit::TestCase
   end
 
   # def test_parse_best_guess
-  #   parse_now('every Month')
   #   parse_now('every year')
 
   #   parse_now('weekly')
-  #   parse_now('monthly')
   #   parse_now('yearly')
 
   #   parse_now('every 3 days')
@@ -44,11 +46,7 @@ class TestParsing < Test::Unit::TestCase
   #   parse_now('every other year')
   #   parse_now('every other day starting May 1st')
   #   parse_now('every other week starting this Sunday')
-
-  #   parse_now('every Monday')
-  #   parse_now('every Wednesday')
-  #   parse_now('every Friday')
-
+  #   
   #   parse_now('every May')
   #   parse_now('every june')
 

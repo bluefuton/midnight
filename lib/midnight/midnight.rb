@@ -95,6 +95,13 @@ module Midnight
           expr.minute = 0
         end
 
+        # Monthly
+        if (token.type == :weekday)
+          expr.day_of_week = token.position_in_sequence
+          expr.hour = 0
+          expr.minute = 0
+        end
+
         # Minute
         if (token.type == :minute)
           num_token = tokens.detect { |t| t.type == :number }
@@ -109,17 +116,18 @@ module Midnight
   end
 
   class Token #:nodoc:
-    attr_accessor :word, :type, :interval, :start
+    attr_accessor :word, :type, :interval, :start, :position_in_sequence
 
     def initialize(word)
       @word = word
       @type = @interval = @start = nil
     end
 
-    def update(type, start=nil, interval=nil)
+    def update(type, start=nil, interval=nil, position_in_sequence=nil)
       @start = start
       @type = type
       @interval = interval
+      @position_in_sequence = position_in_sequence
     end
   end
 
