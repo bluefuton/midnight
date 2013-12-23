@@ -16,7 +16,8 @@ class TestParsing < Test::Unit::TestCase
       'every day at 3am' => '0 3 * * *',
       'every week' => '0 0 * * 0',
       'every 5 minutes' => '*/5 * * * *',
-      'every 30 minutes' => '*/30 * * * *'      
+      'every 30 minutes' => '*/30 * * * *',
+      'every month' => '0 0 1 * *'      
     }
 
     expected_results.each do |search,cron_string|
@@ -25,7 +26,6 @@ class TestParsing < Test::Unit::TestCase
   end
 
   # def test_parse_best_guess
-  #   parse_now('every week')
   #   parse_now('every Month')
   #   parse_now('every year')
 

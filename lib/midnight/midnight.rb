@@ -88,6 +88,13 @@ module Midnight
           expr.minute = 0
         end
 
+        # Monthly
+        if (token.type == :month)
+          expr.day_of_month = 1
+          expr.hour = 0
+          expr.minute = 0
+        end
+
         # Minute
         if (token.type == :minute)
           num_token = tokens.detect { |t| t.type == :number }
