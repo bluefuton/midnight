@@ -69,7 +69,7 @@ module Midnight
       expr = CronExpression.new
       tokens.each do |token|
         # Daily
-        if (token.word == 'day' && token.interval == 1)
+        if (token.type == :day && token.interval == 1)
           expr.minute = '0'
 
           # Do we need to run it at a specific time?
