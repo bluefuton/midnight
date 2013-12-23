@@ -1,3 +1,0 @@
-= midnight
-  http://github.com/bluefuton/cronstar
-  by Chris Rosser <chris@bluefuton.com>
