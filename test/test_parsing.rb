@@ -14,7 +14,9 @@ class TestParsing < Test::Unit::TestCase
       'every day' =>  '0 0 * * *',
       'daily' => '0 0 * * *',
       'every day at 3am' => '0 3 * * *',
-      'every week' => '0 0 * * 0'
+      'every week' => '0 0 * * 0',
+      'every 5 minutes' => '*/5 * * * *',
+      'every 30 minutes' => '*/30 * * * *'      
     }
 
     expected_results.each do |search,cron_string|

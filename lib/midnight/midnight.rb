@@ -87,6 +87,14 @@ module Midnight
           expr.hour = 0
           expr.minute = 0
         end
+
+        # Minute
+        if (token.type == :minute)
+          num_token = tokens.detect { |t| t.type == :number }
+          if num_token.is_a?(Token)
+            expr.minute = '*/' + num_token.interval.to_s
+          end 
+        end
       end
       #puts tokens.inspect
       expr

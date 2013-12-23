@@ -72,8 +72,10 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
       /^fortnights?$/ => {:type => :fortnight, :interval => 365, :start => :today},
       /^week(ly)?s?$/ => {:type => :week, :interval => 7, :start => :today},
       /^weekends?$/ => {:type => :weekend, :interval => 7, :start => :saturday},
-    /^days?$/ => {:type => :day, :interval => 1, :start => :today},
-    /^daily?$/ => {:type => :day, :interval => 1, :start => :today}}
+      /^days?$/ => {:type => :day, :interval => 1, :start => :today},
+      /^daily?$/ => {:type => :day, :interval => 1, :start => :today},
+      /^minutes?$/ => {:type => :minute, :start => :today}
+    }
     scanner.keys.each do |scanner_item|
       if scanner_item =~ token.word
         token.update(scanner[scanner_item][:type], scanner[scanner_item][:start], scanner[scanner_item][:interval]) if scanner_item =~ token.word
