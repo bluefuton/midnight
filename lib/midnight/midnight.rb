@@ -95,7 +95,7 @@ module Midnight
           expr.minute = 0
         end
 
-        # Monthly
+        # Weekday
         if (token.type == :weekday)
           expr.day_of_week = token.position_in_sequence
           expr.hour = 0

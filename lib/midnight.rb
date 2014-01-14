@@ -15,6 +15,7 @@ require 'chronic'
 require 'midnight/midnight'
 require 'midnight/handler'
 require 'midnight/repeater'
+require 'midnight/cron_expression'
 
 module Midnight
   VERSION = "0.0.1"

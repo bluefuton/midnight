@@ -65,6 +65,7 @@ class TestParsing < Test::Unit::TestCase
   #   parse_now('the 10th of the month')
   #   parse_now('the tenth of the month')
   #   parse_now('the 3rd Sunday of the month')
+  #   5am every Tuesday
   # end
 
   def test_argument_validation
