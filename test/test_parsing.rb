@@ -14,6 +14,7 @@ class TestParsing < Test::Unit::TestCase
       'every day' =>  '0 0 * * *',
       'daily' => '0 0 * * *',
       'every day at 3am' => '0 3 * * *',
+      'daily at 5am' => '0 5 * * *',
       'every week' => '0 0 * * 0',
       'weekly' => '0 0 * * 0',
       'every minute' => '* * * * *',
@@ -70,6 +71,8 @@ class TestParsing < Test::Unit::TestCase
   #   parse_now('the tenth of the month')
   #   parse_now('the 3rd Sunday of the month')
   #   5am every Tuesday
+  #   Handle 12 hour clock e.g. every day at 5pm
+  #   Handle 24 hour clock with minutes
   # end
 
   def test_argument_validation
