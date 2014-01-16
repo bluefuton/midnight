@@ -22,7 +22,7 @@ class Midnight::Converter
   protected
   def detect_minute_repetition
     @tokens.each do |token|
-      if (token.type == :minute)
+      if (token.type == :minute && @tokens.length <= 2)
         num_token = tokens.detect { |t| t.type == :number }
         if num_token.is_a?(Midnight::Token)
           @expr.minute = '*/' + num_token.interval.to_s
@@ -70,9 +70,26 @@ class Midnight::Converter
         @expr.minute = '0'
 
         # Do we need to run it at a specific time?
-        hour_token = tokens.detect { |t| t.type == :number }
+        hour_token = tokens.detect { |t| t.type == :number || t.type == :hour }
         if hour_token.is_a?(Midnight::Token)
-          @expr.hour = hour_token.interval
+
+          hour = hour_token.interval if hour_token.type == :number
+          hour = hour_token.word if hour_token.type == :hour
+
+          # Is there a meridiem token (am/pm) too?
+          meridiem_token = tokens.detect { |t| t.type == :meridiem } 
+
+          if (!meridiem_token.nil? && meridiem_token.word == 'pm')
+            hour = hour + 12
+          end
+
+          # Is a minute specified?
+          minute_token = tokens.detect { |t| t.type == :minute }
+          if minute_token.is_a?(Midnight::Token)          
+            @expr.minute = minute_token.word
+          end
+
+          @expr.hour = hour
         else
           @expr.hour = 0
         end 

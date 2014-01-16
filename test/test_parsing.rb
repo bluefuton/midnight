@@ -31,7 +31,12 @@ class TestParsing < Test::Unit::TestCase
       'hourly' => '0 * * * *',
       'every year' => '0 0 1 1 *',
       'yearly' => '0 0 1 1 *',
-      'annually' => '0 0 1 1 *'
+      'annually' => '0 0 1 1 *',
+      'every day at 9am' => '0 9 * * *',
+      'every day at 5pm' => '0 17 * * *',
+      'every day at 5:45pm' => '45 17 * * *',      
+      'every day at 17:00' => '0 17 * * *',
+      'every day at 17:25' => '25 17 * * *'      
     }
 
     expected_results.each do |search,cron_string|

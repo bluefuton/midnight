@@ -3,18 +3,28 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
   def self.scan(tokens)
     # for each token
     tokens.each do |token|
+      token = self.scan_for_24h_times(token)
       token = self.scan_for_numbers(token)
       token = self.scan_for_month_names(token)
       token = self.scan_for_day_names(token)
       token = self.scan_for_special_text(token)
       token = self.scan_for_units(token)
     end
+
+    tokens = self.split_time_tokens(tokens)
     tokens
   end
 
   def self.scan_for_numbers(token)
     num = Float(token.word) rescue nil
     token.update(:number, nil, num.to_i) if num
+    token
+  end
+
+  def self.scan_for_24h_times(token)
+    if token.word =~ /(2[0-3]|[01]?[0-9]):([0-5]?[0-9])/
+      token.update(:time, nil, nil)
+    end
     token
   end
 
@@ -90,7 +100,8 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
       /^days?$/ => {:type => :day, :interval => 1, :start => :today},
       /^daily?$/ => {:type => :day, :interval => 1, :start => :today},
       /^minutes?$/ => {:type => :minute, :start => :today},
-      /^hour(ly)?s?$/ => {:type => :hour, :start => :today}
+      /^hour(ly)?s?$/ => {:type => :hour, :start => :today},
+      /^am|pm$/ => {:type => :meridiem}
     }
     scanner.keys.each do |scanner_item|
       if scanner_item =~ token.word
@@ -98,6 +109,26 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
       end
     end
     token
+  end
+
+  # Split time tokens into constituent hour and minute tokens
+  def self.split_time_tokens(tokens)
+    tokens_output = []
+    tokens.each do |token|
+      if (token.type == :time)
+        time_parts = token.word.split(':')
+        hour_token = Midnight::Token.new(time_parts[0].to_i)
+        hour_token.update(:hour)
+        minute_token = Midnight::Token.new(time_parts[1].to_i)
+        minute_token.update(:minute)
+        tokens_output << hour_token
+        tokens_output << minute_token
+      else
+        tokens_output << token
+      end
+    end
+
+    tokens_output
   end
 
 end
