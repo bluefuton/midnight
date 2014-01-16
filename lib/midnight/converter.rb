@@ -35,7 +35,7 @@ class Midnight::Converter
 
   def detect_hour_repetition
     @tokens.each do |token|
-      if (token.type == :hour)
+      if (token.type == :hour && @tokens.length <= 2)
         @expr.minute = 0
         num_token = tokens.detect { |t| t.type == :number }
         if num_token.is_a?(Midnight::Token)
@@ -56,11 +56,13 @@ class Midnight::Converter
   end
 
   def detect_weekday_repetition
-    token = @tokens.first
-    if (token.type == :weekday)
+    token = @tokens.detect { |t| t.type == :weekday }
+    if (!token.nil?)
+      hour_token = @tokens.detect { |t| t.type == :hour || t.type == :number}
+      minute_token = @tokens.detect { |t| t.type == :minute }
       @expr.day_of_week = token.position_in_sequence
-      @expr.hour = 0
-      @expr.minute = 0
+      @expr.hour = hour_token.nil? ? 0 : adjust_hour_for_meridiem(hour_token.word)
+      @expr.minute = minute_token.nil? ? 0 : minute_token.word
     end
   end    
 
@@ -77,11 +79,7 @@ class Midnight::Converter
           hour = hour_token.word if hour_token.type == :hour
 
           # Is there a meridiem token (am/pm) too?
-          meridiem_token = tokens.detect { |t| t.type == :meridiem } 
-
-          if (!meridiem_token.nil? && meridiem_token.word == 'pm')
-            hour = hour + 12
-          end
+          hour = adjust_hour_for_meridiem(hour)
 
           # Is a minute specified?
           minute_token = tokens.detect { |t| t.type == :minute }
@@ -115,4 +113,15 @@ class Midnight::Converter
       @expr.month = 1
     end
   end 
+
+  def adjust_hour_for_meridiem(hour)
+    # Is there a meridiem token (am/pm)?
+    meridiem_token = @tokens.detect { |t| t.type == :meridiem } 
+
+    if (!meridiem_token.nil? && meridiem_token.word == 'pm')
+      hour = hour.to_i + 12
+    end
+
+    hour
+  end
 end

@@ -36,7 +36,9 @@ class TestParsing < Test::Unit::TestCase
       'every day at 5pm' => '0 17 * * *',
       'every day at 5:45pm' => '45 17 * * *',      
       'every day at 17:00' => '0 17 * * *',
-      'every day at 17:25' => '25 17 * * *'      
+      'every day at 17:25' => '25 17 * * *',
+      '5:15am every Tuesday' => '15 5 * * 2',
+      '7pm every Thursday' => '0 19 * * 4'
     }
 
     expected_results.each do |search,cron_string|
@@ -76,8 +78,7 @@ class TestParsing < Test::Unit::TestCase
   #   parse_now('the tenth of the month')
   #   parse_now('the 3rd Sunday of the month')
   #   5am every Tuesday
-  #   Handle 12 hour clock e.g. every day at 5pm
-  #   Handle 24 hour clock with minutes
+  #   out of bounds values e.g. 4:61pm
   # end
 
   def test_argument_validation
