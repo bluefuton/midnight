@@ -1,0 +1,21 @@
+every 3 days
+every 3 weeks
+every 3 months
+every 3 years
+
+every other day
+every other week
+every other month
+every other year
+every other day starting May 1st
+every other week starting this Sunday
+
+the 10th of the month
+the tenth of the month
+the 3rd Sunday of the month
+out of bounds values e.g. 4:61pm
+midnight, midday
+every 5 minutes on fridays
+multiple days "every tuesday, wednesday and friday at 5pm"
+multiple hours or minutes
+ranges of minutes
