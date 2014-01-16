@@ -23,7 +23,10 @@ class TestParsing < Test::Unit::TestCase
       'every Monday' => '0 0 * * 1',
       'every Wednesday' => '0 0 * * 3',
       'every Friday' => '0 0 * * 5',
-      'this one should not return a result' => nil
+      'this one should not return a result' => nil,
+      'every hour' => '0 * * * *',
+      'every 6 hours' => '0 */6 * * *',
+      'hourly' => '0 * * * *'
     }
 
     expected_results.each do |search,cron_string|

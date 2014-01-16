@@ -111,6 +111,15 @@ module Midnight
             expr.force_run_every_minute = true
           end 
         end
+
+        # Hour
+        if (token.type == :hour)
+          expr.minute = 0
+          num_token = tokens.detect { |t| t.type == :number }
+          if num_token.is_a?(Token)
+            expr.hour = '*/' + num_token.interval.to_s
+          end 
+        end        
       end
       #puts tokens.inspect
       expr
