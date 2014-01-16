@@ -34,7 +34,9 @@ class TestParsing < Test::Unit::TestCase
       'every day at 17:00' => '0 17 * * *',
       'every day at 17:25' => '25 17 * * *',
       '5:15am every Tuesday' => '15 5 * * 2',
-      '7pm every Thursday' => '0 19 * * 4'
+      '7pm every Thursday' => '0 19 * * 4',
+      'every May' => '0 0 1 5 *',
+      'every December' => '0 0 1 12 *'
     }
 
     expected_results.each do |search,cron_string|
@@ -55,9 +57,6 @@ class TestParsing < Test::Unit::TestCase
   #   parse_now('every other day starting May 1st')
   #   parse_now('every other week starting this Sunday')
   #   
-  #   parse_now('every May')
-  #   parse_now('every june')
-
   #   parse_now('beginning of the week')
   #   parse_now('middle of the week')
   #   parse_now('end of the week')

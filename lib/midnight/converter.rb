@@ -106,11 +106,12 @@ class Midnight::Converter
 
   def detect_year_repetition
     token = @tokens.first
-    if (token.type == :year)
+    if (token.type == :year || token.type == :month_name)
       @expr.day_of_month = 1
       @expr.hour = 0
       @expr.minute = 0
       @expr.month = 1
+      @expr.month = token.position_in_sequence if token.type == :month_name
     end
   end 
 

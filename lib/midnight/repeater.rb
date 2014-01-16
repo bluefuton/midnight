@@ -41,8 +41,25 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
       /^oct\.?(ober)?$/ => :october,
       /^nov\.?(ember)?$/ => :november,
     /^dec\.?(ember)?$/ => :december}
-    scanner.keys.each do |scanner_item|
-      token.update(:month_name, scanner[scanner_item], 30) if scanner_item =~ token.word
+
+    month_sequence = {
+      :january => 1,
+      :february => 2,
+      :march => 3,
+      :april => 4,
+      :may => 5,
+      :june => 6,
+      :july => 7,
+      :august => 8,
+      :september => 9,
+      :october => 10,
+      :november => 11, 
+      :december => 12
+    }
+
+    scanner.each do |scanner_item, month|
+      position_in_sequence = month_sequence[month]
+      token.update(:month_name, scanner[scanner_item], 30, position_in_sequence) if scanner_item =~ token.word
     end
     token
   end
