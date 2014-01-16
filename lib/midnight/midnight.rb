@@ -36,7 +36,8 @@ module Midnight
       # remove all tokens without a type
       @tokens.reject! {|token| token.type.nil? }
 
-      cron_expression = Converter.convert_tokens_to_cron_expression(@tokens)
+      converter = Converter.new
+      cron_expression = converter.convert_tokens_to_cron_expression(@tokens)
 
       return cron_expression
     end
