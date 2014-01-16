@@ -4,10 +4,6 @@ require 'test/unit'
 
 class TestParsing < Test::Unit::TestCase
 
-  def setup
-
-  end
-
   def test_parse
     expected_results = {
       'each day' =>  '0 0 * * *',
@@ -77,8 +73,10 @@ class TestParsing < Test::Unit::TestCase
   #   parse_now('the 10th of the month')
   #   parse_now('the tenth of the month')
   #   parse_now('the 3rd Sunday of the month')
-  #   5am every Tuesday
   #   out of bounds values e.g. 4:61pm
+  #   midnight, midday
+  #   every 5 minutes on fridays
+
   # end
 
   def test_argument_validation

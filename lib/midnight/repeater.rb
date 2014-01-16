@@ -118,8 +118,8 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
       if (token.type == :time)
         time_parts = token.word.split(':')
         hour_token = Midnight::Token.new(time_parts[0].to_i)
-        hour_token.update(:hour)
         minute_token = Midnight::Token.new(time_parts[1].to_i)
+        hour_token.update(:hour)
         minute_token.update(:minute)
         tokens_output << hour_token
         tokens_output << minute_token
