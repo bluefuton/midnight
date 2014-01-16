@@ -81,7 +81,8 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
   end
 
   def self.scan_for_units(token)
-    scanner = {/^year(ly)?s?$/ => {:type => :year, :interval => 365, :start => :today},
+    scanner = {
+      /^year(ly)?s?|annually$/ => {:type => :year, :interval => 365, :start => :today},
       /^month(ly)?s?$/ => {:type => :month, :interval => 30, :start => :today},
       /^fortnights?$/ => {:type => :fortnight, :interval => 365, :start => :today},
       /^week(ly)?s?$/ => {:type => :week, :interval => 7, :start => :today},

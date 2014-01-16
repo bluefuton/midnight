@@ -27,20 +27,18 @@ class TestParsing < Test::Unit::TestCase
       'this one should not return a result' => nil,
       'every hour' => '0 * * * *',
       'every 6 hours' => '0 */6 * * *',
-      'hourly' => '0 * * * *'
+      'hourly' => '0 * * * *',
+      'every year' => '0 0 1 1 *',
+      'yearly' => '0 0 1 1 *',
+      'annually' => '0 0 1 1 *'
     }
 
     expected_results.each do |search,cron_string|
-      assert_equal(cron_string, Midnight.parse(search).to_s)
+      assert_equal(cron_string, Midnight.parse(search).to_s, search)
     end
   end
 
   # def test_parse_best_guess
-  #   parse_now('every year')
-
-  #   parse_now('weekly')
-  #   parse_now('yearly')
-
   #   parse_now('every 3 days')
   #   parse_now('every 3 weeks')
   #   parse_now('every 3 months')

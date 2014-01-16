@@ -5,12 +5,15 @@ class Midnight::Converter
     @expr = Midnight::CronExpression.new
     @tokens = tokens
 
+    return @expr if @tokens.empty?
+
     detect_minute_repetition
     detect_hour_repetition
     detect_day_repetition
     detect_weekday_repetition
     detect_week_repetition
     detect_month_repetition
+    detect_year_repetition
 
     #puts tokens.inspect
     @expr
@@ -84,5 +87,15 @@ class Midnight::Converter
       @expr.hour = 0
       @expr.minute = 0
     end
-  end      
+  end     
+
+  def detect_year_repetition
+    token = @tokens.first
+    if (token.type == :year)
+      @expr.day_of_month = 1
+      @expr.hour = 0
+      @expr.minute = 0
+      @expr.month = 1
+    end
+  end 
 end
