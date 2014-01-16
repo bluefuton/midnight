@@ -24,9 +24,12 @@ class Midnight::Converter
     @tokens.each do |token|
       if (token.type == :minute && @tokens.length <= 2)
         num_token = tokens.detect { |t| t.type == :number }
+        hour_token = tokens.detect { |t| t.type == :hour }
         if num_token.is_a?(Midnight::Token)
           @expr.minute = '*/' + num_token.interval.to_s
-        else
+        elsif !hour_token.nil?
+          @expr.hour = adjust_hour_for_meridiem(hour_token.word)
+        elsif @tokens.length == 1  
           @expr.force_run_every_minute = true
         end 
       end
@@ -121,6 +124,10 @@ class Midnight::Converter
 
     if (!meridiem_token.nil? && meridiem_token.word == 'pm')
       hour = hour.to_i + 12
+    end
+
+    if hour == 24
+      hour = 0
     end
 
     hour

@@ -29,7 +29,8 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
   end
 
   def self.scan_for_month_names(token)
-    scanner = {/^jan\.?(uary)?$/ => :january,
+    scanner = {
+      /^jan\.?(uary)?$/ => :january,
       /^feb\.?(ruary)?$/ => :february,
       /^mar\.?(ch)?$/ => :march,
       /^apr\.?(il)?$/ => :april,
@@ -66,16 +67,16 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
 
   def self.scan_for_day_names(token)
     scanner = {
-      /^su[nm](day)?$/ => :sunday,
-      /^m[ou]n(day)?$/ => :monday,
-      /^t(ue|eu|oo|u|)s(day)?$/ => :tuesday,
+      /^su[nm](day)?s?$/ => :sunday,
+      /^m[ou]n(day)?s?$/ => :monday,
+      /^t(ue|eu|oo|u|)s(day)?s?$/ => :tuesday,
       /^tue$/ => :tuesday,
-      /^we(dnes|nds|nns)day$/ => :wednesday,
+      /^we(dnes|nds|nns)day?s?$/ => :wednesday,
       /^wed$/ => :wednesday,
-      /^th(urs|ers)day$/ => :thursday,
+      /^th(urs|ers)day?s?$/ => :thursday,
       /^thu$/ => :thursday,
-      /^fr[iy](day)?$/ => :friday,
-      /^sat(t?[ue]rday)?$/ => :saturday
+      /^fr[iy](day)?s?$/ => :friday,
+      /^sat(t?[ue]rday)?s?$/ => :saturday
     }
 
     day_sequence = {
@@ -96,7 +97,8 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
   end
 
   def self.scan_for_special_text(token)
-    scanner = {/^other$/ => :other,
+    scanner = {
+      /^other$/ => :other,
       /^begin(ing|ning)?$/ => :beginning,
       /^start$/ => :beginning,
       /^end$/ => :end,
