@@ -15,6 +15,7 @@ class TestParsing < Test::Unit::TestCase
       'daily' => '0 0 * * *',
       'every day at 3am' => '0 3 * * *',
       'every week' => '0 0 * * 0',
+      'weekly' => '0 0 * * 0',
       'every minute' => '* * * * *',
       'every 5 minutes' => '*/5 * * * *',
       'every 30 minutes' => '*/30 * * * *',
