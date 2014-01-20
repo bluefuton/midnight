@@ -5,7 +5,7 @@ class Midnight::Converter
     @expr = Midnight::CronExpression.new
     @tokens = tokens
 
-    return @expr if @tokens.empty?
+    return @expr if @tokens.empty? || tokens.detect { |t| t.type == :special }
 
     detect_minute_repetition
     detect_hour_repetition

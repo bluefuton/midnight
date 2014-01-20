@@ -39,7 +39,8 @@ class TestParsing < Test::Unit::TestCase
       'every December' => '0 0 1 12 *',
       'midnight' => '0 0 * * *',
       'midnight on tuesdays' => '0 0 * * 2',
-      'every 5 minutes on Tuesdays' => '*/5 * * * 2'
+      'every 5 minutes on Tuesdays' => '*/5 * * * 2',
+      'every other day' => nil # other is currently unsupported
     }
 
     expected_results.each do |search,cron_string|
