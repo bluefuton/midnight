@@ -7,9 +7,9 @@ A library to parse natural language date/time into a cron expression.
 
 h2. Supported phrases
 
-A full list of supported natural language phrases can be found in test_parsing.rb.
+A full list of supported natural language phrases can be found in <a href="https://github.com/bluefuton/midnight/blob/develop/test/test_parsing.rb">test_parsing.rb</a>.
 
-In the future there'll be support for more complex repetitions - a wishlist can be found in todo.md.
+In the future there'll be support for more complex repetitions - a wishlist can be found in <a href="https://github.com/bluefuton/midnight/blob/develop/todo.txt">todo.txt</a>.
 
 h2. Credits
 
