@@ -1,5 +1,7 @@
 h1. midnight
 
+<img src="https://api.travis-ci.org/bluefuton/midnight.png" alt="Travis build status" />
+
 A library to parse natural language date/time into a cron expression.
 
 <pre>Midnight.parse('every 5 minutes').to_s
