@@ -1,0 +1,18 @@
+h1. midnight
+
+A library to parse natural language date/time into a cron expression.
+
+<pre>Midnight.parse('every 5 minutes').to_s
+ => "*/5 * * * *"</pre>
+
+h2. Supported phrases
+
+A full list of supported natural language phrases can be found in test_parsing.rb.
+
+In the future there'll be support for more complex repetitions - a wishlist can be found in todo.md.
+
+h2. Credits
+
+My tokeniser code is based on the excellent <a href="https://github.com/yb66/tickle">Tickle</a> gem, which in turn relies on <a href="https://github.com/mojombo/chronic">Chronic</a> for date parsing.
+
+Author: Chris Rosser <chris@bluefuton.com>
