@@ -118,7 +118,7 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
       /^weekends?$/ => {:type => :weekend, :interval => 7, :start => :saturday},
       /^days?$/ => {:type => :day, :interval => 1, :start => :today},
       /^daily?$/ => {:type => :day, :interval => 1, :start => :today},
-      /^minutes?$/ => {:type => :minute, :start => :today},
+      /^minutes?$/ => {:type => :minute_word, :start => :today},
       /^hour(ly)?s?$/ => {:type => :hour, :start => :today},
       /^am|pm$/ => {:type => :meridiem}
     }

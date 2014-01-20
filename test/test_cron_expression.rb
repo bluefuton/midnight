@@ -13,5 +13,6 @@ class TestParsing < Test::Unit::TestCase
     cron = Midnight::CronExpression.new
     cron.minute = 30
     assert_equal '30 * * * *', cron.to_s
+    assert_equal 30, cron.minute
   end
 end

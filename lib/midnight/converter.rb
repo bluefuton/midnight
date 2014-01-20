@@ -22,29 +22,44 @@ class Midnight::Converter
   protected
   def detect_minute_repetition
     @tokens.each do |token|
-      if (token.type == :minute && @tokens.length <= 2)
+      if (token.type == :minute_word)
         num_token = tokens.detect { |t| t.type == :number }
         hour_token = tokens.detect { |t| t.type == :hour }
         if num_token.is_a?(Midnight::Token)
           @expr.minute = '*/' + num_token.interval.to_s
         elsif !hour_token.nil?
           @expr.hour = adjust_hour_for_meridiem(hour_token.word)
+          @expr.minute = token.word
         elsif @tokens.length == 1  
           @expr.force_run_every_minute = true
         end 
+      end
+
+      if (token.type == :minute)
+        @expr.minute = token.word
       end
     end
   end
 
   def detect_hour_repetition
+    num_token = tokens.detect { |t| t.type == :number }
+
     @tokens.each do |token|
-      if (token.type == :hour && @tokens.length <= 2)
-        @expr.minute = 0
+      if (token.type == :hour)
+        @expr.minute = 0 if @expr.minute.nil?
         num_token = tokens.detect { |t| t.type == :number }
         if num_token.is_a?(Midnight::Token)
           @expr.hour = '*/' + num_token.interval.to_s
+        elsif @tokens.length == 1
+          @expr.hour = nil
+        else
+          @expr.hour = adjust_hour_for_meridiem(token.word)
         end 
-      end         
+      end
+
+      if (token.type == :meridiem && !num_token.nil?)
+        @expr.hour = adjust_hour_for_meridiem(num_token.word)
+      end
     end      
   end
 
@@ -61,11 +76,11 @@ class Midnight::Converter
   def detect_weekday_repetition
     token = @tokens.detect { |t| t.type == :weekday }
     if (!token.nil?)
-      hour_token = @tokens.detect { |t| t.type == :hour || t.type == :number}
-      minute_token = @tokens.detect { |t| t.type == :minute }
       @expr.day_of_week = token.position_in_sequence
-      @expr.hour = hour_token.nil? ? 0 : adjust_hour_for_meridiem(hour_token.word)
-      @expr.minute = minute_token.nil? ? 0 : minute_token.word
+      if !@tokens.detect { |t| t.type == :minute_word }
+        @expr.hour = 0 if @expr.hour.nil?
+      end
+      @expr.minute = 0 if @expr.minute.nil?
     end
   end    
 

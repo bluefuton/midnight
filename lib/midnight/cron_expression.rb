@@ -8,7 +8,7 @@
 # │ └──────────────────── hour (0 - 23)
 # └───────────────────────── min (0 - 59)
 class Midnight::CronExpression #:nodoc:
-  attr_writer :minute, :hour, :day_of_month, :month, :day_of_week, :force_run_every_minute
+  attr_accessor :minute, :hour, :day_of_month, :month, :day_of_week, :force_run_every_minute
 
   def to_s
     return '* * * * *' if (@force_run_every_minute === true)
