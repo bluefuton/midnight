@@ -17,23 +17,22 @@ require 'midnight/handler'
 require 'midnight/repeater'
 require 'midnight/cron_expression'
 require 'midnight/converter'
+require 'midnight/version'
 
 module Midnight
-  VERSION = "0.0.1"
-  
   def self.debug; false; end
-  
+
   def self.dwrite(msg)
     puts msg if Midnight.debug
   end
 end
 
-class Date 
-   def days_in_month 
-     d,m,y = mday,month,year 
-     d += 1 while Date.valid_civil?(y,m,d) 
-     d - 1 
-   end 
+class Date
+   def days_in_month
+     d,m,y = mday,month,year
+     d += 1 while Date.valid_civil?(y,m,d)
+     d - 1
+   end
 end
 
 class Array
