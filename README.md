@@ -8,7 +8,7 @@ A library to parse natural language date/time into a cron expression.
 
 Add this line to your application's Gemfile:
 
-    gem 'midnight'
+    gem 'midnight', ">= 0.0.1.pre"
 
 And then execute:
 
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install midnight
+    $ gem install midnight --pre
 
 ## Usage
 
@@ -25,9 +25,9 @@ Or install it yourself as:
 
 ### Supported phrases
 
-A full list of supported natural language phrases can be found in <a href="https://github.com/bluefuton/midnight/blob/develop/test/test_parsing.rb">test_parsing.rb</a>.
+A full list of supported natural language phrases can be found in <a href="https://github.com/bluefuton/midnight/blob/master/test/test_parsing.rb">test_parsing.rb</a>.
 
-In the future there'll be support for more complex repetitions - a wishlist can be found in <a href="https://github.com/bluefuton/midnight/blob/develop/todo.txt">todo.txt</a>.
+In the future there'll be support for more complex repetitions - a wishlist can be found in <a href="https://github.com/bluefuton/midnight/blob/master/todo.txt">todo.txt</a>.
 
 ## Credits
 
