@@ -134,11 +134,13 @@ class Midnight::Converter
   end 
 
   def adjust_hour_for_meridiem(hour)
+    hour = hour.to_i
+
     # Is there a meridiem token (am/pm)?
     meridiem_token = @tokens.detect { |t| t.type == :meridiem } 
 
-    if (!meridiem_token.nil? && meridiem_token.word == 'pm')
-      hour = hour.to_i + 12
+    if (!meridiem_token.nil? && meridiem_token.word == 'pm' && hour < 12)
+      hour = hour + 12
     end
 
     if hour == 24

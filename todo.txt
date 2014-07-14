@@ -14,7 +14,7 @@ the 10th of the month
 the tenth of the month
 the 3rd Sunday of the month
 out of bounds values e.g. 4:61pm
-midday
+midday - 'noon' works, so Chronic could be patched
 every 5 minutes on fridays
 multiple days "every tuesday, wednesday and friday at 5pm"
 multiple hours or minutes
