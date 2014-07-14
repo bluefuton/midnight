@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'chronic'
-gem 'rake'
+# Specify your gem's dependencies in midnight.gemspec
+gemspec
