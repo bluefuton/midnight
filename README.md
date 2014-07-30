@@ -2,7 +2,7 @@
 
 A library to parse natural language date/time into a cron expression.
 
-<img src="https://api.travis-ci.org/bluefuton/midnight.png" alt="Travis build status" />
+[![Build Status](https://travis-ci.org/bluefuton/midnight.svg?branch=master)](https://travis-ci.org/bluefuton/midnight)
 
 ## Installation
 
