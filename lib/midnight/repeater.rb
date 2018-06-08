@@ -76,7 +76,8 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
       /^th(urs|ers)day?s?$/ => :thursday,
       /^thu$/ => :thursday,
       /^fr[iy](day)?s?$/ => :friday,
-      /^sat(t?[ue]rday)?s?$/ => :saturday
+      /^sat(t?[ue]rday)?s?$/ => :saturday,
+      /^weekdays?$/ => :weekday,
     }
 
     day_sequence = {
@@ -86,7 +87,8 @@ class Midnight::Repeater < Chronic::Tag #:nodoc:
       :wednesday => 3,
       :thursday => 4,
       :friday => 5,
-      :saturday => 6
+      :saturday => 6,
+      :weekday => '1-5',
     }
 
     scanner.each do |scanner_item, day|
