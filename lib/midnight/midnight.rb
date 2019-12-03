@@ -1,4 +1,4 @@
-require_relative "../numerizer/numerizer.rb"
+require 'numerizer'
 
 module Midnight
   class << self
