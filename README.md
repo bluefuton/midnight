@@ -8,7 +8,7 @@ A library to parse natural language date/time into a cron expression.
 
 Add this line to your application's Gemfile:
 
-    gem 'midnight', ">= 0.0.1.pre"
+    gem 'midnight', ">= 1.0.0"
 
 And then execute:
 
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install midnight --pre
+    $ gem install midnight
 
 ## Usage
 
